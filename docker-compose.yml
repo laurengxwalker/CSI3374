@@ -2,25 +2,42 @@ version: "3.8"
 services:
   frontend:
     build: ./frontend
+    container_name: react-app
     ports:
       - "3000:3000"
     depends_on:
       - backend
+    networks:
+      - app-network
 
   backend:
     build: ./backend
+    container_name: fastapi-backend
     ports:
       - "8000:8000"
-    depends_on:
-      - db
-
-  db:
-    image: postgres:13
     environment:
-      POSTGRES_DB: movies_db
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    volumes:
-      - ./data/postgres-data:/var/lib/postgresql/data
+      - DATABASE_URL=postgresql://postgres:password@postgres:5432/mydatabase
+    depends_on:
+      - postgres
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres:13   # Use the latest official PostgreSQL image
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: user    # Set your PostgreSQL user
+      POSTGRES_PASSWORD: password  # Set your PostgreSQL password
+      POSTGRES_DB: movie_db  # Set your PostgreSQL database name
     ports:
-      - "5432:5432"
+      - "5432:5432"  # Expose PostgreSQL default port
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Persist data in a named volume
+
+volumes:
+  postgres_data:
+    driver: local
+networks:
+  app-network:
+    driver: bridge
+

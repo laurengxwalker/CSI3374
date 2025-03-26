@@ -12,6 +12,7 @@ class Movie(BaseModel):
     rating: str
 
 @app.get("/movies", response_model=List[Movie])
+
 def get_movies(genre: str = None, rating: str = None):
     conn = psycopg2.connect(dbname="movies_db", user="user", password="password", host="db")
     cursor = conn.cursor()
