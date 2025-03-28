@@ -4,6 +4,7 @@ FROM node:16
 # Set the working directory inside the container
 WORKDIR /app
 
+COPY package.json ./
 
 # Install dependencies using Yarn
 RUN yarn install
@@ -11,8 +12,8 @@ RUN yarn install
 # Copy the rest of your application
 COPY . .
 
-# Expose the port (adjust as needed)
+# Expose the port for the React app
 EXPOSE 3000
 
-# Command to run the application (adjust as needed)
+# Command to run the React application
 CMD ["yarn", "start"]

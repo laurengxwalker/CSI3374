@@ -34,6 +34,19 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data  # Persist data in a named volume
 
+
+  react-app:
+    image: node:14  
+    container_name: my_react-app
+    build:
+      context: ./frontend
+    working_dir: /app  # Ensure this is the directory where package.json is located
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3001:3000"
+    command: yarn start
+
 volumes:
   postgres_data:
     driver: local
