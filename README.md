@@ -23,11 +23,10 @@ The project would need more development for a working website, including a user 
    cd CSI3374
 
 2. **In terminal**:
-   * To start the app:
-         * run docker -compose up --build
-         * The React app will be available at http://localhost:3000.
-         * The FastAPI backend will be available at http://localhost:8000.
-         * pgAdmin was not used. 
+   * To start the app: run docker -compose up --build
+   * The React app will be available at http://localhost:3000.
+   * The FastAPI backend will be available at http://localhost:8000.
+   * pgAdmin was not used. 
   
 4. **To stop the application**:
    * Run docker compose down 
