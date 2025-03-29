@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
-from db import get_db_connection
+from src.db import get_db_connection
 
 app = FastAPI()
 
