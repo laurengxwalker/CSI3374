@@ -23,29 +23,17 @@ services:
       - app-network
 
   postgres:
-    image: postgres:13   # Use the latest official PostgreSQL image
+    image: postgres:13  
     container_name: postgres_db
     environment:
-      POSTGRES_USER: user    # Set your PostgreSQL user
-      POSTGRES_PASSWORD: password  # Set your PostgreSQL password
-      POSTGRES_DB: movie_db  # Set your PostgreSQL database name
+      POSTGRES_USER: user    
+      POSTGRES_PASSWORD: password  
+      POSTGRES_DB: movie_db  
     ports:
-      - "5432:5432"  # Expose PostgreSQL default port
+      - "5432:5432" 
     volumes:
-      - postgres_data:/var/lib/postgresql/data  # Persist data in a named volume
+      - postgres_data:/var/lib/postgresql/data  
 
-
-  react-app:
-    image: node:14  
-    container_name: my_react-app
-    build:
-      context: ./frontend
-    working_dir: /app  # Ensure this is the directory where package.json is located
-    volumes:
-      - ./frontend:/app
-    ports:
-      - "3001:3000"
-    command: yarn start
 
 volumes:
   postgres_data:
